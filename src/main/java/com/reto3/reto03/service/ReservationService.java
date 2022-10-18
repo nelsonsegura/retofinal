@@ -1,10 +1,11 @@
 package com.reto3.reto03.service;
 
 
+import com.reto3.reto03.entities.Client;
 import com.reto3.reto03.entities.Reservation;
-import com.reto3.reto03.entities.dto.CountClient;
-import com.reto3.reto03.entities.dto.StatusAmount;
 import com.reto3.reto03.repository.ReservationRepository;
+import com.reto3.reto03.service.dto.StatusAccount;
+import com.reto3.reto03.service.dto.TopClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,14 +31,12 @@ public class ReservationService {
 
     public Reservation save(Reservation p){
         if (p.getIdReservation()==null){
-            p.setStatus("created");
             return reservationRepository.save(p);
         }else {
             Optional<Reservation> e =reservationRepository.getReservation(p.getIdReservation());
             if (e.isPresent()){
                 return p;
             }else {
-                p.setStatus("created");
                 return reservationRepository.save(p);
             }
         }
@@ -83,28 +82,42 @@ public class ReservationService {
                 }).orElse(false);
         return success;
     }
-    public List<CountClient> getTopClient(){
-        return reservationRepository.getTopClients();
-    }
-    public StatusAmount getReservationByStatus(){
-        List<Reservation> completed = reservationRepository.getReservationByStatus("completed");
-        List<Reservation> cancelled = reservationRepository.getReservationByStatus("cancelled");
-        return new StatusAmount(cancelled.size(), completed.size());
-    }
-    public List<Reservation> getReservationByPeriod(String init, String end){
-        SimpleDateFormat parseDate = new SimpleDateFormat("yyyy-MM-dd");
-        Date initDate = new Date();
-        Date endDate = new Date();
-        try {
-            initDate = parseDate.parse(init);
-            endDate = parseDate.parse(end);
-        }catch (ParseException e){
-            e.fillInStackTrace();
+
+    public List<Reservation> getReservationsByPeriod (String dateA,String dateB){
+
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        Date a = new Date();
+        Date b = new Date();
+        try{
+            a = parser.parse(dateA);
+            b = parser.parse(dateB);
+        }catch(ParseException e){
+            e.printStackTrace();
         }
-        if (initDate.before(endDate)){
-            return reservationRepository.getReservationByPeriod(initDate, endDate);
-        }else {
-            return new ArrayList<>();
+        if (a.before(b)){
+            return reservationRepository.getDatesReport(a,b);
+        }else{
+            return new ArrayList<Reservation>();
         }
+    }
+
+    public StatusAccount getReportByStatus(){
+        List<Reservation> completes = reservationRepository.getStatusReport("completed");
+        List<Reservation> cancelled = reservationRepository.getStatusReport("cancelled");
+
+        StatusAccount resultado = new StatusAccount(completes.size(), cancelled.size());
+        return resultado;
+    }
+    public List<TopClients> getTopClients(){
+        List<TopClients> tc = new ArrayList<>();
+        List<Object[]> result = reservationRepository.getTopClients();
+
+        for(int i=0; i<result.size(); i++){
+            int total = Integer.parseInt(result.get(i)[1].toString());
+            Client client = (Client) result.get(i)[0];
+            TopClients topClients = new TopClients(total, client);
+            tc.add(topClients);
+        }
+        return tc;
     }
 }

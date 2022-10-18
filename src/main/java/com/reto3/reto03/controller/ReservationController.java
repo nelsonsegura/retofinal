@@ -2,10 +2,10 @@ package com.reto3.reto03.controller;
 
 import com.reto3.reto03.entities.Admin;
 import com.reto3.reto03.entities.Reservation;
-import com.reto3.reto03.entities.dto.CountClient;
-import com.reto3.reto03.entities.dto.StatusAmount;
 import com.reto3.reto03.service.AdminService;
 import com.reto3.reto03.service.ReservationService;
+import com.reto3.reto03.service.dto.StatusAccount;
+import com.reto3.reto03.service.dto.TopClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +29,18 @@ public class ReservationController {
     public Optional<Reservation> getReservation(@PathVariable("id") int reservationId) {
         return reservationService.getReservation(reservationId);
     }
+    @GetMapping("/report-dates/{dateA}/{dateB}")
+    public List<Reservation> getByDates(@PathVariable("dateA") String dateA, @PathVariable("dateB")String dateB) {
+        return reservationService.getReservationsByPeriod(dateA, dateB);
+    }
+    @GetMapping("/report-status")
+    public StatusAccount getByStatus() {
+        return reservationService.getReportByStatus();
+    }
+    @GetMapping("/report-clients")
+    public List<TopClients> getTopClients() {
+        return reservationService.getTopClients();
+    }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,18 +58,5 @@ public class ReservationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int reservationId) {
         return reservationService.delete(reservationId);
-    }
-
-    @GetMapping("/report-clients")
-    public List<CountClient> getReservationsReport(){
-        return reservationService.getTopClient();
-    }
-    @GetMapping("/report-status")
-    public StatusAmount getReservationsStatus(){
-        return reservationService.getReservationByStatus();
-    }
-    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
-    public List<Reservation> getReservationPeriod(@PathVariable("dateOne") String dateOne,@PathVariable("dateTwo") String dateTwo ){
-        return reservationService.getReservationByPeriod(dateOne, dateTwo);
     }
 }
