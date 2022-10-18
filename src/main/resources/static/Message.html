@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-Edge" />
+        <meta name="vieport" content="width=device-width, initial-scale=1"/>
+
+        <title>Message/ AlquiloPC</title>
+    <base href="/reto5/src/main/resources/static/" />
+
+
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/Message.js"></script>
+
+
+    </head>
+    <body>
+    <div class="container login">
+        <div class="row">
+            <div class="col">
+                <span>Home / Message</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container header">
+        <div class="row">
+            <div class="col">
+                <div class="logo"> <img src="images/logo.png" alt="Alquilo PC"> </div>
+                <h2 class="subtitle">Alquier de computadores</h2>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container menu">
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <a href="index.html">      <button class="button"> Inicio        </button></a> &nbsp; &nbsp;
+                    <a href="Admin.html">      <button class="button"> Administrador </button></a> &nbsp; &nbsp;
+                    <a href="Category.html">   <button class="button"> Categoria     </button></a> &nbsp; &nbsp;
+                    <a href="Computer.html">   <button class="button"> Computadores  </button></a> &nbsp; &nbsp;
+                    <a href="Message.html">    <button class="button active"> Mensajes      </button></a> &nbsp; &nbsp;
+                    <a href="Reservation.html"><button class="button"> Reservacion   </button></a> &nbsp; &nbsp;
+                    <a href="Client.html">      <button class="button"> Clients         </button></a> &nbsp; &nbsp;
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container content">
+        <div class="row title">
+            <div class="col">
+                 Mensajes
+            </div>
+         </div>
+        <div class="row newElement" >
+            <div class="col">
+                <button id="btnMessage" class="btnNew" onclick="openModal(-1)">Agregar un mensaje</button>
+            </div>
+        </div>
+        <div class="row data_grip" >
+            <div class="col">
+                <table id="tblMessage" class="tblData">
+                    <thead>
+                         <td>
+                            <th>Mensaje</th>
+                            <th>Actualizar Mensaje</th>
+                            <th>Eliminar Mensaje</th>
+                         </td>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalMessage" class="modal">
+        <div class="modal_content">
+            <button id="btnCancel" class="button cerrar" onclick="closeModal();">Cerrar  </button>
+            <h2>Mensajes</h2><br />
+            <input type="hidden" id="txtId" value="">
+            <label>Mensaje:</label>        <input type="text" id="messageText" value=""> <br />
+            <button id="btnAdd"    class="button" onclick="insertMessage();">Agregar   </button>
+            <button id="btnUpdate" class="button" onclick="updateMessage();">Actualizar</button>
+            <button id="btnCancel" class="button" onclick="closeModal();">Cancelar  </button>
+        </div>
+    </div>
+
+</body>
+</html>
