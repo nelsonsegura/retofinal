@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-Edge" />
+        <meta name="vieport" content="width=device-width, initial-scale=1"/>
+
+        <title>Computer/ AlquiloPC</title>
+        <base href="/reto5/src/main/resources/static/" />
+
+
+        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script type="text/javascript" src="webjars/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/Computer.js"></script>
+
+    </head>
+    <body>
+    <div class="container login">
+        <div class="row">
+            <div class="col">
+                <span>Iniciar secion/ Registrarse</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container header">
+        <div class="row">
+            <div class="col">
+                <div class="logo"> <img src="images/logo.png" alt="Alquilo PC"> </div>
+                <h2 class="subtitle">Alquier de computadores</h2>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container menu">
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <a href="index.html">      <button class="button"> Inicio        </button></a> &nbsp; &nbsp;
+                    <a href="Admin.html">      <button class="button"> Administrador </button></a> &nbsp; &nbsp;
+                    <a href="Category.html">   <button class="button"> Categoria     </button></a> &nbsp; &nbsp;
+                    <a href="Computer.html">   <button class="button active"> Computadores  </button></a> &nbsp; &nbsp;
+                    <a href="Message.html">    <button class="button"> Mensajes      </button></a> &nbsp; &nbsp;
+                    <a href="Reservation.html"><button class="button"> Reservacion   </button></a> &nbsp; &nbsp;
+                    <a href="Score.html">      <button class="button"> Score         </button></a> &nbsp; &nbsp;
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container content">
+        <div class="row title">
+            <div class="col">
+                Computadores
+        </div>
+    </div>
+
+
+        <div class="row data_grip">
+            <div class="col">
+                <table id="tblComputer" class="tblData">
+                    <thead>
+                         <td>
+                            <th>Brand</th>
+                            <th>Year</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Guardar Compu</th>
+                            <th>Actualizar Compu</th>
+                            <th>Eliminar Compu</th>
+                         </td>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+         </div>
+    </div>
+
+
+    <div id="modalAdmin" class="modal">
+        <div class="modal_content">
+              <button id="btnCancel" class="button cerrar" onclick="closeModal();">Cerrar  </button>
+              <h2>Bienvenido Admin </h2><br />
+              <input type="hidden" id="txtId" value=""></input>
+              <label>Nombre:</label>      <input type="text" id="computer_name" value="">         </input> <br />
+              <label>Marca:</label>       <input type="text" id="computer_Brand" value="">        </input> <br />
+              <label>Año:</label>         <input type="number" id="computer_Year" value="">       </input> <br />
+              <label>Descripcion:</label> <input type="text" id="computer_Description" value="">  </input> <br />
+
+            <button id="btnAdd"    class="button" onclick="insertAdmin();">Agregar   </button>
+            <button id="btnUpdate" class="button" onclick="updateAdmin();">Actualizar</button>
+            <button id="btnCancel" class="button" onclick="closeModal();">Cancelar  </button>
+        </div>
+   </div>
+
+
+
+
+</body>
+</html>
